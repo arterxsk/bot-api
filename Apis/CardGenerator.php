@@ -5,7 +5,7 @@ $bin = $_GET['lista'];
 
 print_r(_ccs($bin));
 
-#FUNCIONES REQUERIDAS
+#REQUIRED FUNCTIONS
 
 function _ccs($bin) {
 	if (!is_numeric(substr($bin, 0, 6))) {
