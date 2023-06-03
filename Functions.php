@@ -381,8 +381,8 @@ function GetCard($message) {
 
 function ConsultaAPI($Archivo, $Card) {
 	$server = $_SERVER['SERVER_NAME'];
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, 'http://'.$server.'/bot@arterxsk/Apis/'.$Archivo.'?lista='.$Card);
+	$ch = curl_init(); 
+	curl_setopt($ch, CURLOPT_URL, 'https://'.$server.'/Apis/'.$Archivo.'?lista='.$Card);
 	curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
 	curl_setopt($ch, CURLOPT_HEADER, 0);
 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
