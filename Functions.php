@@ -2,7 +2,7 @@
 
 date_default_timezone_set('America/Lima');
 
-#FUNCION PARA ENVIAR MENSAJES
+#FUNCTION TO SEND MESSAGES
 
 function sendMes($chatId, $message, $message_id) {
 	$ch = curl_init();
@@ -17,7 +17,7 @@ function sendMes($chatId, $message, $message_id) {
 	$result = curl_exec($ch);
 }
 
-#FUNCION PARA AÑADIR CHAT-IDs(USUARIOS O GRUPOS)
+#FUNCTION TO ADD CHAT-IDs (USERS OR GROUPS)
 
 function verAdmin($userId) {
 	$file = array_values(array_unique(file('Users/Admins.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)));
@@ -33,7 +33,7 @@ function verAdmin($userId) {
 	}
 }
 
-#FUNCION PARA VERIFICAR PREMIUM
+#FUNCTION TO VERIFY PREMIUM
 
 function VerificarPremium($Time) {
 	global $chatId,
@@ -64,7 +64,7 @@ function VerificarPremium($Time) {
 	}
 }
 
-#FUNCION PARA VERIFICAR PREMIUM DEL GRUPO
+#FUNCTION TO VERIFY GROUP PREMIUM
 
 function VerificarPremiumGrupo($Time) {
 	global $chatId,
@@ -95,7 +95,7 @@ function VerificarPremiumGrupo($Time) {
 	}
 }
 
-#FUNCION PARA AÑADIR CHAT-IDs(USUARIOS O GRUPOS)
+#WORKS TO ADD CHAT-IDs (USERS OR GROUPS)
 
 function AñadirChatID($data) {
 	$file = fopen("Users/ChatIDs.txt", "a+");
@@ -103,7 +103,7 @@ function AñadirChatID($data) {
 	fclose($file);
 }
 
-#FUNCION PARA SUBIR EL RANGO A PREMIUM(USUARIOS)
+#FUNCTION TO UPGRADE THE RANK TO PREMIUM (USERS)
 
 function PremiumChatID($data) {
 	$user = explode("|", $data)[0];
@@ -115,7 +115,7 @@ function PremiumChatID($data) {
 	fclose($file);
 }
 
-#FUNCION PARA SUBIR EL RANGO A ADMINISTRADOR(USUARIOS)
+#FUNCTION TO RAISE THE RANK TO ADMINISTRATOR (USERS)
 
 function SetAdmin($data) {
 	$file = fopen("Users/Admins.txt", "a+");
@@ -123,7 +123,7 @@ function SetAdmin($data) {
 	fclose($file);
 }
 
-#FUNCION PARA BANEAR USUARIOS
+#FUNCTION TO BAN USERS
 
 function Ban($data) {
 	$file = fopen("Users/Banned.txt", "a+");
@@ -131,7 +131,7 @@ function Ban($data) {
 	fclose($file);
 }
 
-#FUNCION PARA DESBANEAR USUARIOS
+#FUNCTION TO UNBAN USER
 
 function Unban($data) {
 	$file = array_values(array_unique(file('Users/Banned.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)));
@@ -150,7 +150,7 @@ function Unban($data) {
 	fclose($fp);
 }
 
-#FUNCION PARA VERIFICAR EL TIEMPO DE GRUPO
+#FUNCTION TO VERIFY THE GROUP TIME
 
 function MyGroup($chatId) {
 	global $Rank,
@@ -160,13 +160,13 @@ function MyGroup($chatId) {
 	$Rank_Group;
 
 	if ($chatId == $userId) {
-		$message = "Este comando es solo admitido para Grupos.";
+		$message = "This command is only supported for Groups.";
 		sendMes($chatId, $message, $message_id);
 		exit();
 	} elseif ($Rank_Group == "USER") {
-		$tiempo_inicio = "Vuelve Premium a tu Grupo y desbloquea nuevos comandos!\n";
+		$tiempo_inicio = "Return premium to your group and unlock new commands!\n";
 		$tiempo_final = "";
-		$texto3 = "🧨Si ocurre algun error habla a @KingProOficial";
+		$texto3 = "If any error occurs, talk to @arterxsk";
 	} else {
 		$file = array_values(array_unique(file('Users/Premium.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)));
 
@@ -175,15 +175,15 @@ function MyGroup($chatId) {
 			$tiempo_inicio = explode("|", $value)[2];
 			$tiempo_final = explode("|", $value)[1];
 			if ($user_id == $chatId) {
-				$tiempo_inicio = "📅Fecha de inicio de tu plan: ".date("d-m-Y", $tiempo_inicio)."\n";
-				$tiempo_final = "🗓Fecha de expiracion: ".date("d-m-Y", $tiempo_final)."\n";
-				$texto3 = "🧨Si ocurre algun error habla a @KingProOficial";
+				$tiempo_inicio = "Start date of your plan: ".date("d-m-Y", $tiempo_inicio)."\n";
+				$tiempo_final = "Expiration date: ".date("d-m-Y", $tiempo_final)."\n";
+				$texto3 = "If any error occurs, talk to @arterxsk";
 				break;
 			}
 		}
 	}
 
-	$message = "👮 Grupo ID: $chatId \n$tiempo_inicio$tiempo_final$texto3";
+	$message = "GroupID: $chatId \n$tiempo_inicio$tiempo_final$texto3";
 	sendMes($chatId, $message, $message_id);
 	exit();
 }
@@ -196,13 +196,13 @@ function MyAccount($userId) {
 	$username;
 
 	if ($Rank == 'OWNER' || $Rank == 'ADMIN') {
-		$tiempo_inicio = "📅Fecha de inicio de tu plan: No aplica para ". $Rank."s\n";
-		$tiempo_final = "🗓Fecha de expiracion: No aplica para ". $Rank."s\n";
-		$texto3 = "🧨Si ocurre algun error habla a @KingProOficial";
+		$tiempo_inicio = "Start date of your plan: Does not apply for ". $Rank."s\n";
+		$tiempo_final = "Expiration date: Does not apply to ". $Rank."s\n";
+		$texto3 = "If any error occurs, talk to @arterxsk";
 	} elseif ($Rank == 'USER') {
-		$tiempo_inicio = "Vuelvete Premium y desbloquea nuevos comandos!";
+		$tiempo_inicio = "Go premium and unlock new commands!";
 		$tiempo_final = "";
-		$texto3 = "\n🧨Si ocurre algun error habla a @KingProOficial";
+		$texto3 = "\nIf any error occurs, talk to @arterxsk";
 	} else {
 		$file = array_values(array_unique(file('Users/Premium.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)));
 
@@ -211,20 +211,20 @@ function MyAccount($userId) {
 			$tiempo_inicio = explode("|", $value)[2];
 			$tiempo_final = explode("|", $value)[1];
 			if ($user_id == $userId) {
-				$tiempo_inicio = "📅Fecha de inicio de tu plan: ".date("d-m-Y", $tiempo_inicio)."\n";
-				$tiempo_final = "🗓Fecha de expiracion: ".date("d-m-Y", $tiempo_final)."\n";
-				$texto3 = "🧨Si ocurre algun error habla a @KingProOficial";
+				$tiempo_inicio = "Start date of your plan: ".date("d-m-Y", $tiempo_inicio)."\n";
+				$tiempo_final = "Expiration date: ".date("d-m-Y", $tiempo_final)."\n";
+				$texto3 = "If any error occurs, talk to @arterxsk";
 				break;
 			}
 		}
 	}
 
-	$message = "👮User: @".$username."[".$userId."]{".$Rank."}\n$tiempo_inicio$tiempo_final$texto3";
+	$message = "User: @".$username."[".$userId."]{".$Rank."}\n$tiempo_inicio$tiempo_final$texto3";
 	sendMes($chatId, $message, $message_id);
 	exit();
 }
 
-#FUNCION PARA BANEAR USUARIOS
+#FUNCTION TO BAN USERS
 
 function Delete($data) {
 	$file = array_values(array_unique(file('Users/ChatIDs.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)));
@@ -243,7 +243,7 @@ function Delete($data) {
 	fclose($fp);
 }
 
-#FUNCION PARA VERIFICAR CHAT-IDs(USUARIOS O GRUPOS)
+#FUNCTION TO VERIFY CHAT-IDs (USERS OR GROUPS)
 
 function VerificarChatID($chatId) {
 	global $chatId,
@@ -256,7 +256,7 @@ function VerificarChatID($chatId) {
 	$file = array_values(array_unique(file('Users/Banned.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES)));
 	foreach ($file as $key => $value) {
 		if ($value == $userId) {
-			$message = "‼️HAS SIDO BANEADO POR EL ADMIN DE ESTE BOT PORQUE HICISTE ALGO MALO‼️\nPara solicitar acceso contacta con @KingProOficial";
+			$message = "YOU HAVE BEEN BANNED BY THE ADMIN OF THIS BOT BECAUSE YOU DID	SOMETHING WRONG‼️\nTo request access contact @arterxsk";
 			sendMes($chatId, $message, $message_id);
 			exit();
 		}
@@ -292,7 +292,7 @@ function VerificarChatID($chatId) {
 				}
 			}
 		} else {
-			$message = "‼️Hola bienvenido al mejor bot cheker ‼️ [@$username] [$userId]\n❌Lo sentimos pero para pedir acceso contacta a @KingProOficial\n✅Que tengas buen día!!!!";
+			$message = "[𝗲𝗿𝗿𝗼𝗿] You don’t have permission. Contact @arterxsk to buy	a premium access or to make a deal.";
 			sendMes($chatId, $message, $message_id);
 			exit();
 		}
@@ -345,7 +345,7 @@ function VerificarChatID($chatId) {
 				}
 			}
 		} else {
-			$message = "‼️Hola bienvenido al mejor bot cheker ‼️ [@$username] [$userId]\n❌Lo sentimos pero para pedir acceso contacta a @KingProOficial\n✅Que tengas buen día!!!!";
+			$message = "[𝗲𝗿𝗿𝗼𝗿] You don’t have permission. Contact @arterxsk to buy a premium access or to make a deal.";
 			sendMes($chatId, $message, $message_id);
 			exit();
 		}
@@ -364,25 +364,25 @@ function Premium() {
 	$Rank,
 	$Rank_Group;
 	if ($userId == $_artID || $chatId == $_artID || $Admin == true || $Rank_Group == 'PREMIUM' || $Rank == 'PREMIUM') {} else {
-		$message = "‼️Hola, necesitas ser un Usuario o Grupo Premium para usar este comando ‼️ [@$username] [$userId]\n❌Lo sentimos pero para pedir acceso contacta a @KingProOficial\n✅Que tengas buen día!!!!";
+		$message = "[𝗲𝗿𝗿𝗼𝗿] You don’t have permission. Contact @arterxsk to buy a	premium access or to make a deal.";
 		sendMes($chatId, $message, $message_id);
 		exit();
 	}
 }
 
-#FUNCION PARA SUSTRAER CARD CON CUALQUIER COMANDO
+#FUNCTION TO REMOVE CARD WITH ANY COMMAND
 
 function GetCard($message) {
 	$clean = explode(" ", $message)[1];
 	return $clean;
 }
 
-#FUNCION PARA CONSULTAR API
+#FUNCTION TO QUERY API
 
 function ConsultaAPI($Archivo, $Card) {
 	$server = $_SERVER['SERVER_NAME'];
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, 'http://'.$server.'/bot@KingProOficial/Apis/'.$Archivo.'?lista='.$Card);
+	curl_setopt($ch, CURLOPT_URL, 'http://'.$server.'/bot@arterxsk/Apis/'.$Archivo.'?lista='.$Card);
 	curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
 	curl_setopt($ch, CURLOPT_HEADER, 0);
 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
@@ -396,7 +396,7 @@ function ConsultaAPI($Archivo, $Card) {
 	$GLOBALS['Resultado'] = $Resultado;
 }
 
-#FUNCION PARA CONSULTAR API
+#FUNCTION TO QUERY API
 
 function Respuesta($Gateway, $Resultado, $Rank) {
 	global $chatId,
@@ -406,9 +406,9 @@ function Respuesta($Gateway, $Resultado, $Rank) {
 	$Archivo,
 	$Rank;
 
-	if ($Gateway == 'CC Generator' || $Archivo == 'CardGenerator.php') {
+	if ($Gateway == 'Card Generator' || $Archivo == 'CardGenerator.php') {
 		$Resultado = str_replace("-", "\n", $Resultado);
-		$Resultado = "✅ NAMSO GENERATOR:\n".$Resultado;
+		$Resultado = "Card Generator:\n".$Resultado;
 		sendMes($chatId, $Resultado, $message_id);
 	} else {
 		preg_match_all('/\[(.*?)\] => (.*?)\./', $Resultado, $output_array);
@@ -432,10 +432,10 @@ function Respuesta($Gateway, $Resultado, $Rank) {
 		$Currency = $array_nuevo['Currency'];
 
 		if ($Gateway == 'BIN Lookup' || $Archivo == 'BinLookup.php') {
-			$message = "⚜️Bin Válido\n💳Bin: $Bin\n🧨Info: $Scheme - $Tipo - $Brand\n🏦Bank: $Banco\n🌐Country: $Pais $Bandera\n💸Currency: $Currency\n💣Checked By: @$username { $Rank }\n🤴Made by: @KingProOficial";
+			$message = "[✦] 𝗯𝗶𝗻 𝗶𝗻𝗳𝗼\n\n⌗ 𝗯𝗶𝗻: $Bin\n⌗ 𝗶𝗻𝗳𝗼: $Scheme - $Tipo - $Brand\n⌗ 𝗯𝗮𝗻𝗸: $Banco\n⌗ 𝗰𝗼𝘂𝗻𝘁𝗿𝘆: $Pais $Bandera\n⌗ 𝗰𝘂𝗿𝗿𝗲𝗻𝗰𝘆: $Currency\n⌗ 𝗰𝗵𝗲𝗰𝗸𝗲𝗱 𝗯𝘆: $username { $Rank }\n\n𝗯𝗼𝘁 𝗯𝘆: @arterxsk";
 			sendMes($chatId, $message, $message_id);
 		} else {
-			$message = "💳Card -›› $Card\n⚡️Status -›› $Status\n‼️Gateway: $Gateway\n➖➖➖➖➖➖➖➖➖➖\n〰️〰️Detalles del bin〰️〰️\n🧨Bin -›› $Bin - $Scheme  - $Tipo - $Brand\n🏦Bank -›› $Banco\n💣Country -›› $Pais $Bandera - 💲$Currency\n〰️〰️〰️‹‹Info››〰️〰️〰️\n☑️Proxy -›› ???\n👁‍🗨Checked By -›› @$username { $Rank } \n🤴Bot By: @KingProOficial";
+			$message = "[✦] 𝗰𝗮𝗿𝗱 𝗶𝗻𝗳𝗼\n\n⌗ 𝗴𝗮𝘁𝗲𝘄𝗮𝘆: $Bin\n\n[✦] 𝗯𝗶𝗻 𝗱𝗲𝘁𝗮𝗶𝗹𝘀⌗ 𝗯𝗶𝗻: $Bin\n⌗ 𝗶𝗻𝗳𝗼: $Scheme - $Tipo - $Brand\n⌗ 𝗯𝗮𝗻𝗸: $Banco\n⌗ 𝗰𝗼𝘂𝗻𝘁𝗿𝘆: $Pais $Bandera\n⌗ 𝗰𝘂𝗿𝗿𝗲𝗻𝗰𝘆: $Currency\n⌗ 𝗰𝗵𝗲𝗰𝗸𝗲𝗱 𝗯𝘆: $username { $Rank }\n\n𝗯𝗼𝘁 𝗯𝘆: @arterxsk";
 			sendMes($chatId, $message, $message_id);
 		}
 	}
