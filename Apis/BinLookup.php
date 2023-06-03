@@ -22,23 +22,21 @@ $bank = getStr($add, '"bank":{"name":"', '",');
 $emoji = getStr($add, '"emoji":"', '",');
 
 
-$Resultado = ['Bin' => $bin, 'Scheme'=> ucfirst($card), 'Tipo' => ucfirst($type), 'Brand' => $brand, 'Pais' => $country, 'Banco' => ucfirst(strtolower($bank)), 'Bandera' => $emoji, 'Currency' => $currency];
+$Resultado = ['Bin' => $bin, 'Scheme' => ucfirst($card), 'Tipo' => ucfirst($type), 'Brand' => $brand, 'Pais' => $country, 'Banco' => ucfirst(strtolower($bank)), 'Bandera' => $emoji, 'Currency' => $currency];
 
 Transform($Resultado);
 
-#FUNCIONES REQUERIDAS
+#REQUIRED FUNCTIONS
 
-function getStr($string, $start, $end)
-{
-    $str = explode($start, $string);
-    $str = explode($end, $str[1]);
-    return $str[0];
+function getStr($string, $start, $end) {
+	$str = explode($start, $string);
+	$str = explode($end, $str[1]);
+	return $str[0];
 }
 
-function Transform($Resultado)
-{
-    foreach ($Resultado as $key => $value) {
-        $Resultado[$key] = $value.'.';
-    }
-    print_r($Resultado);
+function Transform($Resultado) {
+	foreach ($Resultado as $key => $value) {
+		$Resultado[$key] = $value.'.';
+	}
+	print_r($Resultado);
 }
