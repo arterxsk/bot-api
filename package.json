@@ -1,0 +1,27 @@
+{
+ "name": "arterxsk-checker",
+ "version": "0.1.0",
+ "description": "arterxsk checker",
+ "main": "server.js",
+ "scripts": {
+  "start": "php -S 0.0.0.0:8000 -t ."
+ },
+ "dependencies": {
+  "fastify": "^4.17.0",
+  "handlebars": "^4.7.7",
+  "@fastify/formbody": "^7.4.0",
+  "@fastify/static": "^6.10.2",
+  "@fastify/view": "^7.4.1"
+ },
+ "engines": {
+  "node": "14.x"
+ },
+ "repository": {
+  "url": "https://arterxsk.glitch.me/"
+ },
+ "license": "MIT",
+ "keywords": [
+  "node",
+  "glitch"
+ ]
+}
